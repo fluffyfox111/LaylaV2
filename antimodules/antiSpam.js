@@ -3,7 +3,7 @@ const antisetup = require('../antisetup.json');
 
 const antiSpam = (client) => {
     const spamMap = new Map();
-    console.log('\x1b[36m[ SECUTIRY ]\x1b[0m', '\x1b[32mAnti - Spam System Active ✅\x1b[0m');
+    console.log('\x1b[36m[ SÉCURITÉ ]\x1b[0m', '\x1b[32mSystème Anti-Spam Actif ✅\x1b[0m');
     client.on('messageCreate', (message) => {
         if (!message.guild) return;
         const settings = antisetup[message.guild.id]?.antiSpam;
@@ -28,13 +28,13 @@ const antiSpam = (client) => {
             const logChannel = message.guild.channels.cache.get(antisetup[message.guild.id].logChannelId);
 
             if (settings.action === 'warn') {
-                channel.send(`${author}, please stop spamming!`);
-                logChannel?.send(`User ${author.tag} warned for spamming.`);
+                channel.send(`${author}, s'il vous plaît, arrêtez de spammer !`);
+                logChannel?.send(`L'utilisateur ${author.tag} a été averti pour spam.`);
             } else if (settings.action === 'timeout') {
                 const member = channel.guild.members.cache.get(author.id);
                 if (member) {
                     member.timeout(settings.duration, 'Spamming');
-                    logChannel?.send(`User ${author.tag} muted for spamming for ${settings.duration / 1000} seconds.`);
+                    logChannel?.send(`L'utilisateur ${author.tag} a été mis en sourdine pour spam pendant ${settings.duration / 1000} secondes.`);
                 }
             }
             spamMap.delete(author.id);
