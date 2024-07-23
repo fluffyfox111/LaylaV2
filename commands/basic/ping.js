@@ -15,7 +15,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor('#0099ff')
             .setTitle('Pong! 🏓')
-            .setDescription(`Bot Latency: ${botLatency}ms\nAPI Latency: ${apiLatency}ms`)
+            .setDescription(`Latence du Bot: ${botLatency}ms\nAPI Latence: ${apiLatency}ms`)
             .setTimestamp();
 
         await interaction.reply({ embeds: [embed] });
