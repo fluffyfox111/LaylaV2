@@ -5,34 +5,34 @@ const anime = require('anime-actions');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('bully')
-        .setDescription('Intimider quelqu\'un !')
+        .setDescription('Bully someone!')
         .addUserOption(option => 
             option.setName('user')
-                .setDescription('L\'utilisateur à intimider')
+                .setDescription('The user to bully')
                 .setRequired(true)),
     async execute(interaction) {
         if (interaction.isCommand && interaction.isCommand()) {
-            // Exécution de la commande slash
+            // Slash command execution
             const sender = interaction.user;
             const bulliedUser = interaction.options.getUser('user');
             const bullyGif = await anime.bully();
 
             const embed = new EmbedBuilder()
                 .setColor('#ffcc00')
-                .setDescription(`${sender} intimide ${bulliedUser} ! 😡`)
+                .setDescription(`${sender} is bullying ${bulliedUser}! 😡`)
                 .setImage(bullyGif)
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed] });
         } else {
-            // Exécution de la commande avec préfixe
+            // Prefix command execution
             const sender = interaction.author;
             const targetUser = interaction.mentions.users.first();
             const bullyGif = await anime.bully();
 
             const embed = new EmbedBuilder()
                 .setColor('#ffcc00')
-                .setDescription(`${sender} intimide ${targetUser || 'l\'air'} ! 😡`)
+                .setDescription(`${sender} is bullying ${targetUser || 'the air'}! 😡`)
                 .setImage(bullyGif);
 
             interaction.reply({ embeds: [embed] });

@@ -5,14 +5,14 @@ const anime = require('anime-actions');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('bored')
-        .setDescription('Action d\'ennui !'),
+        .setDescription('Bored action!'),
     async execute(interaction) {
         const sender = interaction.user;
         const boredGif = await anime.bored();
 
         const embed = new EmbedBuilder()
             .setColor('#ffcc00')
-            .setDescription(`${sender} s'ennuie ! 😐`)
+            .setDescription(`${sender} is feeling bored! 😐`)
             .setImage(boredGif)
             .setTimestamp();
 

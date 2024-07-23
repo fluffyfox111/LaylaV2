@@ -5,34 +5,34 @@ const anime = require('anime-actions');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('bonk')
-        .setDescription('Donne un coup sur la tête à quelqu\'un !')
+        .setDescription('Bonk someone!')
         .addUserOption(option => 
             option.setName('user')
-                .setDescription('L\'utilisateur à bonker')
+                .setDescription('The user to bonk')
                 .setRequired(true)),
     async execute(interaction) {
         if (interaction.isCommand && interaction.isCommand()) {
-            // Exécution de la commande slash
+            // Slash command execution
             const sender = interaction.user;
             const bonkedUser = interaction.options.getUser('user');
             const bonkGif = await anime.bonk();
 
             const embed = new EmbedBuilder()
                 .setColor('#ffcc00')
-                .setDescription(`${sender} donne un coup sur la tête à ${bonkedUser} ! 🤦‍♂️`)
+                .setDescription(`${sender} is bonking ${bonkedUser}! 🤦‍♂️`)
                 .setImage(bonkGif)
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed] });
         } else {
-            // Exécution de la commande avec préfixe
+            // Prefix command execution
             const sender = interaction.author;
             const targetUser = interaction.mentions.users.first();
             const bonkGif = await anime.bonk();
 
             const embed = new EmbedBuilder()
                 .setColor('#ffcc00')
-                .setDescription(`${sender} donne un coup sur la tête à ${targetUser || 'l\'air'} ! 🤦‍♂️`)
+                .setDescription(`${sender} is bonking ${targetUser || 'the air'}! 🤦‍♂️`)
                 .setImage(bonkGif);
 
             interaction.reply({ embeds: [embed] });
