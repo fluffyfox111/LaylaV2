@@ -3,11 +3,11 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('choose')
-        .setDescription('Randomly chooses one item from the provided options')
+        .setName('choisir')
+        .setDescription('Choisit aléatoirement un élément parmi les options fournies')
         .addStringOption(option =>
             option.setName('options')
-                .setDescription('Options separated by commas')
+                .setDescription('Options séparées par des virgules')
                 .setRequired(true)),
 
     async execute(interaction) {
@@ -15,42 +15,42 @@ module.exports = {
         let options;
 
         if (interaction.isCommand && interaction.isCommand()) {
-            // Slash command execution
+            // Exécution de la commande slash
             options = interaction.options.getString('options').split(',');
         } else {
-            // Prefix command execution
+            // Exécution de la commande avec préfixe
             const message = interaction;
             sender = message.author;
             const args = message.content.split(' ');
-            args.shift(); // Remove the command name
+            args.shift(); // Supprimer le nom de la commande
             options = args.join(' ').split(',');
         }
 
-        // Trim and clean up the options
+        // Nettoyer et traiter les options
         options = options.map(option => option.trim());
 
-        // Choose a random option
+        // Choisir une option aléatoire
         let chosenOption;
         if (options.length === 1 && options[0].includes(' ')) {
-            // If options are provided as a single string separated by spaces
+            // Si les options sont fournies comme une seule chaîne séparée par des espaces
             options = options[0].split(' ');
             chosenOption = options[Math.floor(Math.random() * options.length)];
         } else {
-            // Normal case: options are already split into array
+            // Cas normal : les options sont déjà divisées en tableau
             chosenOption = options[Math.floor(Math.random() * options.length)];
         }
 
         const embed = new EmbedBuilder()
             .setColor('#3498db')
-            .setTitle('Random Choice Generator')
-            .setDescription(`**Options:** ${options.join(', ')}\n**Chosen Option:** ${chosenOption}`)
+            .setTitle('Générateur de choix aléatoire')
+            .setDescription(`**Options :** ${options.join(', ')}\n**Option choisie :** ${chosenOption}`)
             .setTimestamp();
 
         if (interaction.isCommand && interaction.isCommand()) {
-            // Reply to slash command interaction
+            // Répondre à l'interaction de commande slash
             await interaction.reply({ embeds: [embed] });
         } else {
-            // Reply to prefix command interaction
+            // Répondre à l'interaction de commande avec préfixe
             await interaction.reply({ embeds: [embed] });
         }
     },
