@@ -64,7 +64,7 @@ module.exports = {
     if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
       const embed = new EmbedBuilder()
           .setColor('#ff0000')
-          .setDescription('You do not have permission to use this command.');
+          .setDescription('no.');
       return interaction.reply({ embeds: [embed], ephemeral: true });
   }
     const title = interaction.options.getString('title');
