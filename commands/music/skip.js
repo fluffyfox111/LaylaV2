@@ -50,7 +50,7 @@ module.exports = {
             const nextSongEmbed = new EmbedBuilder()
                 .setColor('#DC92FF')
                 .setAuthor({ 
-                    name: "Oops!", 
+                    name: "Song Skipped", 
                     iconURL: musicIcons.skipIcon ,
                      url: "https://discord.gg/xQF9f9yUEM"
                     })

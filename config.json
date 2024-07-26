@@ -3,8 +3,15 @@
     "prefix": "!",
     "youtubeapi": "AIzaSyAholYB1sYcBuZu5pKfB0RTmLWyPG7rN44",
     "geniusToken": "0CHr9jtPjR7EKraXUVv6__8ELmEwFeUwt5vYAhk-is_fGOq-10-epdMzESkMPUnf",
-    "hentai": true,
-      "excessCommands": {
+    "hentaicommands": {
+        "1252159749076553738": {
+            "status": true
+        },
+        "1264193986231271555": {
+            "status": true
+        }
+    },
+    "excessCommands": {
         "utility": true,
         "other": true,
         "hentai": true,
@@ -13,14 +20,13 @@
     },
     "spotifyClientId": "f71a3da30e254962965ca2a89d6f74b9",
     "spotifyClientSecret": "199a619d22dd4e55a4a2c1a7a3d70e63",
-    "lavalink": {
-        "host": "lavalink.oryzen.xyz",
-        "port": 80,
-        "password": "oryzen.xyz"
-    },
     "guilds": {
         "1264193986231271555": {
             "welcomeChannelId": "1264203222793457714",
+            "status": true
+        },
+        "1252159749076553738": {
+            "welcomeChannelId": "1264906095843868742",
             "status": true
         }
     },
@@ -58,6 +64,10 @@
         "1264193986231271555": {
             "roleId": "1264203077200773191",
             "status": true
+        },
+        "1252159749076553738": {
+            "roleId": "1264868575865213023",
+            "status": false
         }
     }
 }

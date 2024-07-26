@@ -9,6 +9,7 @@ const musicIcons = {
     beatsIcon: 'https://cdn.discordapp.com/emojis/928310693416009828.gif',
     skipIcon: 'https://cdn.discordapp.com/emojis/938388856095514654.gif',
     stopIcon: 'https://cdn.discordapp.com/emojis/1021628438441902100.gif',
+    volumeIcon: 'https://cdn.discordapp.com/emojis/1040824501711159397.gif',
 };
 
 module.exports = musicIcons;

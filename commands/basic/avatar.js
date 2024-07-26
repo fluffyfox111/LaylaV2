@@ -4,10 +4,10 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('avatar')
-        .setDescription('Affiche l\'avatar de l\'utilisateur spécifié')
+        .setDescription('Shows your avatar with download links')
         .addUserOption(option => 
             option.setName('user')
-                .setDescription('L\'utilisateur dont vous voulez voir l\'avatar')
+                .setDescription('The user to show avatar for')
                 .setRequired(false)),
     async execute(interaction) {
         // Function to create the embed

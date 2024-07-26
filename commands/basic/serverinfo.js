@@ -4,20 +4,20 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('serverinfo')
-        .setDescription('Affiche des informations détaillées sur le serveur'),
+        .setDescription('Show detailed information about the server'),
     async execute(interaction) {
         const server = interaction.guild;
         const emojis = server.emojis.cache;
         const roles = server.roles.cache;
         const textChannels = server.channels.cache.filter(channel => channel.type === 'GUILD_TEXT').size;
         const voiceChannels = server.channels.cache.filter(channel => channel.type === 'GUILD_VOICE').size;
-        const verificationLevels = ['Aucun', 'Faible', 'Moyen', 'Élevé', 'Très Élevé'];
-        const defaultNotifications = ['Tous les Messages', 'Seulement les Mentions'];
+        const verificationLevels = ['None', 'Low', 'Medium', 'High', 'Very High'];
+        const defaultNotifications = ['All Messages', 'Only Mentions'];
 
         try {
             const owner = await server.members.fetch(server.ownerId);
             if (!owner) {
-                throw new Error('Propriétaire du serveur non trouvé.');
+                throw new Error('Server owner not found.');
             }
 
             const boosters = server.premiumSubscriptionCount;
@@ -25,28 +25,28 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor('#FFFFFF')
-                .setTitle('📊 Informations sur le Serveur')
+                .setTitle('📊 Server Info')
                 .setThumbnail(server.iconURL({ format: 'png', dynamic: true, size: 1024 }))
                 .setDescription(`
-                    **Nom du Serveur:** ${server.name}
-                    **ID du Serveur:** ${server.id}
-                    **Propriétaire:** ${owner.user.tag}
-                    **Créé le:** ${server.createdAt.toUTCString()}
-                    **Membres:** ${server.memberCount}
-                    **Boosters:** ${boosters} (Niveau ${boostLevel})
-                    **Émojis:** ${emojis.size} émojis
-                    **Rôles:** ${roles.size} rôles
-                    **Salons Textuels:** ${textChannels}
-                    **Salons Vocaux:** ${voiceChannels}
-                    **Niveau de Vérification:** ${verificationLevels[server.verificationLevel]}
-                    **Notifications par Défaut:** ${defaultNotifications[server.defaultMessageNotifications]}
+                    **Server Name:** ${server.name}
+                    **Server ID:** ${server.id}
+                    **Owner:** ${owner.user.tag}
+                    **Created At:** ${server.createdAt.toUTCString()}
+                    **Members:** ${server.memberCount}
+                    **Boosters:** ${boosters} (Level ${boostLevel})
+                    **Emojis:** ${emojis.size} emojis
+                    **Roles:** ${roles.size} roles
+                    **Text Channels:** ${textChannels}
+                    **Voice Channels:** ${voiceChannels}
+                    **Verification Level:** ${verificationLevels[server.verificationLevel]}
+                    **Default Notifications:** ${defaultNotifications[server.defaultMessageNotifications]}
                 `)
                 .setTimestamp();
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            console.error('Erreur lors de la récupération des informations du serveur :', error);
-            await interaction.reply('Une erreur est survenue lors de la récupération des informations du serveur.');
+            console.error('Error fetching server information:', error);
+            await interaction.reply('An error occurred while fetching server information.');
         }
     },
 };

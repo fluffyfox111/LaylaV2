@@ -21,8 +21,12 @@ const loadEventHandlers = () => {
     console.log('\x1b[36m[ REACTION ROLES ]\x1b[0m', '\x1b[32mReaction Roles System Active ✅\x1b[0m');
     const reactionRoleHandler = require('./events/reactionroles');
     reactionRoleHandler(client);
+    const nqnHandler = require('./events/nqn');
+    nqnHandler(client);
+    const emojiHandler = require('./events/emojiHandler');
+    console.log('\x1b[36m[ NQN Module ]\x1b[0m', '\x1b[32mEmoji System Active ✅\x1b[0m');
+    emojiHandler(client);
     require('./events/music')(client);
-    
 };
 
 

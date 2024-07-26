@@ -101,30 +101,44 @@ const fetchAndRegisterCommands = async () => {
         const response = await axios.get('http://shiva:3000/api/commands');
         const commands = response.data;
 
-        // Register each command dynamically
         commands.forEach(command => {
-            client.commands.set(command.name, {
-                ...command,
-                execute: async (interaction) => {
-                    try {
-                        const embed = new EmbedBuilder()
-                            .setTitle(command.embed.title)
-                            .setDescription(command.embed.description)
-                            .setImage(command.embed.image)
-                            .addFields(command.embed.fields);
+            try {
 
-                        await interaction.reply({ embeds: [embed] });
-                    } catch (error) {
-                        console.error('Error executing command:', error.message);
-                        await interaction.reply('Failed to execute the command.');
+                client.commands.set(command.name, {
+                    ...command,
+                    execute: async (interaction) => {
+                        try {
+                            const embed = new EmbedBuilder()
+                                .setTitle(command.embed.title)
+                                .setDescription(command.embed.description)
+                                .setImage(command.embed.image)
+                                .addFields(command.embed.fields)
+                                .setColor(command.embed.color)
+                                .setFooter({ 
+                                    text: command.embed.footer.text, 
+                                    iconURL: command.embed.footer.icon_url 
+                                })
+                                .setAuthor({ 
+                                    name: command.embed.author.name, 
+                                    iconURL: command.embed.author.icon_url 
+                                });
+
+                            await interaction.reply({ embeds: [embed] });
+                        } catch (error) {
+                            console.error(`Error executing command ${command.name}:`, error);
+                            await interaction.reply('Failed to execute the command.');
+                        }
                     }
-                }
-            });
+                });
+            } catch (error) {
+                console.error(`Validation error for command ${command.name}:`, error.message);
+            }
         });
     } catch (error) {
-
+       
     }
 };
+
 
 
 const antiSpam = require('./antimodules/antiSpam');
@@ -145,7 +159,7 @@ client.once('ready', async () => {
     antiRaid(client);
     try {
         await verifyCommandsCount();
-
+        await fetchAndRegisterCommands();
         const registeredCommands = await rest.get(
             Routes.applicationCommands(client.user.id)
         );
@@ -253,35 +267,34 @@ client.distube
 
 
 
-const data = require('./UI/banners/musicard'); 
+    const data = require('./UI/banners/musicard'); // Adjust the path if necessary
 
-async function generateMusicCard(song) {
-    try {
-        const randomIndex = Math.floor(Math.random() * data.backgroundImages.length);
-        const backgroundImage = data.backgroundImages[randomIndex];
-        
-       
-
-        const musicCard = await Dynamic({
-            thumbnailImage: song.thumbnail,
-            name: song.name,
-            author: song.formattedDuration,
-            authorColor: "#FF7A00",
-            progress: 50,
-            imageDarkness: 60,
-            backgroundImage: backgroundImage,
-            nameColor: "#FFFFFF",
-            progressColor: "#FF7A00",
-            progressBarColor: "#5F2D00",
-        });
-
-        return musicCard;
-    } catch (error) {
-        console.error('Error generating music card:', error);
-        throw error;
+    async function generateMusicCard(song) {
+        try {
+            // Randomly select a background image
+            const randomIndex = Math.floor(Math.random() * data.backgroundImages.length);
+            const backgroundImage = data.backgroundImages[randomIndex];
+            
+            // Generate the music card with Dynamic
+            const musicCard = await Dynamic({
+                thumbnailImage: song.thumbnail,
+                name: song.name,
+                author: song.formattedDuration,
+                authorColor: "#FF7A00",
+                progress: 50,
+                imageDarkness: 60,
+                backgroundImage: backgroundImage, // Use the selected background image
+                nameColor: "#FFFFFF",
+                progressColor: "#FF7A00",
+                progressBarColor: "#5F2D00",
+            });
+    
+            return musicCard;
+        } catch (error) {
+            console.error('Error generating music card:', error);
+            throw error;
+        }
     }
-}
-
 
 
 function checkWelcomeSetup() {

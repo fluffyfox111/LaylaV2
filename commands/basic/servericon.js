@@ -4,14 +4,14 @@ const { EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('servericon')
-        .setDescription('Affiche l\'icône du serveur'),
+        .setDescription('Show the server icon'),
     async execute(interaction) {
         if (interaction.isCommand && interaction.isCommand()) {
             // Slash command execution
             const serverIcon = interaction.guild.iconURL({ format: 'png', dynamic: true, size: 1024 });
 
             if (!serverIcon) {
-                return interaction.reply('Ce serveur n\'a pas d\'icône.');
+                return interaction.reply('This server does not have an icon.');
             }
 
             const embed = new EmbedBuilder()

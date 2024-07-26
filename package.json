@@ -26,6 +26,7 @@
     "discord-music-player": "^9.1.1",
     "discord-player": "^6.6.10",
     "discord.js": "^14.15.3",
+    "dismusic": "^2.1.10",
     "distube": "^5.0.1",
     "dotenv": "^16.4.5",
     "erela.js": "^2.4.0",
@@ -57,8 +58,10 @@
     "random-memes": "^3.2.6",
     "request": "^2.88.2",
     "riffy": "^1.0.3",
+    "shoukaku": "^4.0.1",
     "sqlite3": "^5.1.7",
     "undici": "^6.18.2",
+    "wcard-gen": "^2.0.31",
     "yt-search": "^2.11.0",
     "ytdl-core": "^4.11.5",
     "ytsr": "^3.8.4"

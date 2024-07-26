@@ -2,7 +2,7 @@ const antisetup = require('../antisetup.json');
 
 const antiRaid = (client) => {
     const joinMap = new Map();
-    console.log('\x1b[36m[ SÉCURITÉ ]\x1b[0m', '\x1b[32mSystème Anti-Raid Actif ✅\x1b[0m');
+    console.log('\x1b[36m[ SECUTIRY ]\x1b[0m', '\x1b[32mAnti - Raid System Active ✅\x1b[0m');
     client.on('guildMemberAdd', (member) => {
         const guild = member.guild;
         const settings = antisetup[guild.id]?.antiRaid;
@@ -22,12 +22,12 @@ const antiRaid = (client) => {
             recentJoins.forEach(async (m) => {
                 const raidMember = guild.members.cache.get(m.id);
                 if (raidMember) {
-                    await raidMember[settings.action]('Anti-raid : Rejoindre rapidement');
-                    logChannel?.send(`L'utilisateur ${raidMember.user.tag} a été expulsé/banni pour avoir rejoint rapidement.`);
+                    await raidMember[settings.action]('Anti-raid: Rapid joining');
+                    logChannel?.send(`User ${raidMember.user.tag} kicked/banned for rapid joining.`);
                 }
             });
 
-            guild.owner.send('Une tentative de raid a été détectée et empêchée.');
+            guild.owner.send('A raid attempt was detected and prevented.');
         }
     });
 };

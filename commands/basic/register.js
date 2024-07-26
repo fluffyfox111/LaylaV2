@@ -3,8 +3,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('register')
-        .setDescription('Vous enregistrez'),
+        .setDescription('Registers you'),
     async execute(interaction) {
-        await interaction.reply('Enregiste!');
+        await interaction.reply('Registered!');
     },
 };

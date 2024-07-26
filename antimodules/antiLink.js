@@ -2,7 +2,7 @@ const antisetup = require('../antisetup.json');
 
 const antiLink = (client) => {
     const linkMap = new Map();
-    console.log('\x1b[36m[ SÉCURITÉ ]\x1b[0m', '\x1b[32mSystème Anti-Lien Actif ✅\x1b[0m');
+    console.log('\x1b[36m[ SECUTIRY ]\x1b[0m', '\x1b[32mAnti - Link System Active ✅\x1b[0m');
     client.on('messageCreate', (message) => {
         if (!message.guild) return;
         const settings = antisetup[message.guild.id]?.antiLink;
@@ -17,16 +17,16 @@ const antiLink = (client) => {
         if (linkRegex.test(content)) {
             if (settings.mode === 'full') {
                 message.delete();
-                channel.send(`${author}, la publication de liens n'est pas autorisée !`);
-                logChannel?.send(`L'utilisateur ${author.tag} a posté un lien et le message a été supprimé.`);
+                channel.send(`${author}, posting links is not allowed!`);
+                logChannel?.send(`User ${author.tag} posted a link and the message was deleted.`);
             } else if (settings.mode === 'partial') {
                 const currentTime = Date.now();
                 const lastLinkTime = linkMap.get(author.id) || 0;
 
                 if (currentTime - lastLinkTime < settings.linkInterval) {
                     message.delete();
-                    channel.send(`${author}, vous ne pouvez publier des liens que toutes les ${settings.linkInterval / 1000} secondes !`);
-                    logChannel?.send(`L'utilisateur ${author.tag} a posté un lien trop tôt et le message a été supprimé.`);
+                    channel.send(`${author}, you can only post links every ${settings.linkInterval / 1000} seconds!`);
+                    logChannel?.send(`User ${author.tag} posted a link too soon and the message was deleted.`);
                 } else {
                     linkMap.set(author.id, currentTime);
                 }
