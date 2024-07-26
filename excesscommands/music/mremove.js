@@ -1,3 +1,7 @@
+const { EmbedBuilder } = require('discord.js');
+const musicIcons = require('../../UI/icons/musicicons'); 
+
+
 module.exports = {
     name: 'mremove',
     description: 'Remove a song from the queue by its index',
@@ -11,6 +15,16 @@ module.exports = {
         }
 
         const removed = player.queue.remove(index - 1);
-        message.reply(`Removed \`${removed[0].title}\` from the queue.`);
+        const removeembed = new EmbedBuilder()
+                .setColor('#DC92FF')
+                .setAuthor({ 
+                    name: "Removed Song", 
+                    iconURL: musicIcons.skipIcon ,
+                     url: "https://discord.gg/xQF9f9yUEM"
+                    })
+                .setFooter({ text: 'Lavalink Player', iconURL: musicIcons.footerIcon })  
+                .setDescription(`- **Removed Song : ${removed[0].title}**)`);
+
+        message.reply({ embeds: [removeembed] });
     }
 };

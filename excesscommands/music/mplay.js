@@ -1,3 +1,6 @@
+const { EmbedBuilder } = require('discord.js');
+const musicIcons = require('../../UI/icons/musicicons'); 
+
 module.exports = {
     name: 'mplay',
     description: 'Play a song from YouTube or Spotify',
@@ -33,19 +36,40 @@ module.exports = {
         switch (res.loadType) {
             case 'NO_MATCHES':
                 if (!player.queue.current) player.destroy();
-                return message.reply('No results found!');
+                const noMatchesEmbed = new EmbedBuilder()
+                    .setColor('#DC92FF') 
+                    .setFooter({ text: 'Lavalink player', iconURL: musicIcons.footerIcon })
+                    .setAuthor({ name: 'No Results Found', iconURL: musicIcons.wrongIcon }); 
+                return message.reply({ embeds: [noMatchesEmbed] }); 
             case 'TRACK_LOADED':
                 player.queue.add(res.tracks[0]);
                 if (!player.playing && !player.paused && !player.queue.size) player.play();
-                return message.reply(`Enqueuing \`${res.tracks[0].title}\`.`);
+                const trackLoadedEmbed = new EmbedBuilder()
+                    .setColor('#DC92FF')
+                    .setAuthor({ name: 'Track Enqueued', iconURL: musicIcons.correctIcon }) 
+                    .setFooter({ text: 'Lavalink player', iconURL: musicIcons.footerIcon })
+                    .setDescription(`Adding ${res.tracks[0].title}.`); 
+                return message.reply({ embeds: [trackLoadedEmbed] });
             case 'PLAYLIST_LOADED':
                 player.queue.add(res.tracks);
                 if (!player.playing && !player.paused && player.queue.totalSize === res.tracks.length) player.play();
-                return message.reply(`Enqueuing playlist \`${res.playlist.name}\` with ${res.tracks.length} tracks.`);
+                const playlistLoadedEmbed = new EmbedBuilder()
+                    .setColor('#DC92FF')
+                    .setAuthor({ name: 'Playlist Enqueued', iconURL: musicIcons.correctIcon }) 
+                    .setFooter({ text: 'Lavalink player', iconURL: musicIcons.footerIcon })
+                    .setDescription(`Adding playlist ${res.playlist.name} with ${res.tracks.length} tracks.`);
+                return message.reply({ embeds: [playlistLoadedEmbed] });
             case 'SEARCH_RESULT':
                 player.queue.add(res.tracks[0]);
                 if (!player.playing && !player.paused && !player.queue.size) player.play();
-                return message.reply(`Enqueuing \`${res.tracks[0].title}\`.`);
+                const searchResultEmbed = new EmbedBuilder()
+                    .setColor('#DC92FF')
+                    .setAuthor({ name: 'Search Result', iconURL: musicIcons.correctIcon }) 
+                    .setFooter({ text: 'Lavalink player', iconURL: musicIcons.footerIcon })
+                    .setDescription(`Adding ${res.tracks[0].title}.`);
+                return message.reply({ embeds: [searchResultEmbed] });
+            default:
+                return message.reply('An unexpected error occurred.'); 
         }
     }
 };
