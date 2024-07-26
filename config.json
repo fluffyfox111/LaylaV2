@@ -21,30 +21,30 @@
     "spotifyClientId": "f71a3da30e254962965ca2a89d6f74b9",
     "spotifyClientSecret": "199a619d22dd4e55a4a2c1a7a3d70e63",
     "guilds": {
-        "1264193986231271555": {
+        "1217139049437860060": {
             "welcomeChannelId": "1264203222793457714",
             "status": true
         },
-        "1252159749076553738": {
+        "1217139049437860060": {
             "welcomeChannelId": "1264906095843868742",
             "status": true
         }
     },
     "tickets": {
-        "1264193986231271555": {
+        "1217139049437860060": {
             "ticketChannelId": "1264203166455566347",
             "adminRoleId": "1264203077200773191",
             "status": true
         }
     },
     "voiceChannelSetup": {
-        "1264193986231271555": {
+        "1217139049437860060": {
             "mainVoiceChannelId": "1264207248712929310",
             "adminRoleId": "1264203077200773191",
             "managerChannelId": "1264207197022457911",
             "status": true
         },
-        "1252159749076553738": {
+        "1217139049437860060": {
             "mainVoiceChannelId": "1264867964650262579",
             "adminRoleId": "1264868575865213023",
             "managerChannelId": "1264868000293584969",
